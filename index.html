@@ -6,170 +6,321 @@
 	<meta http-equiv="x-ua-compatible" content="ie=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="node_modules/shower-ribbon/styles/screen-16x10.css">
+	<style>
+		/* Clear slide */
+		.slide.clear {
+			padding: 0;
+		}
+		/* Cover background image */
+		.cover-bg {
+			padding: 0;
+			background-repeat: no-repeat;
+			background-size: cover;
+			background-position: 50%;
+		}
+		.contain-bg {
+			padding: 0;
+			background-repeat: no-repeat;
+			background-size: contain;
+			background-position: 50%;
+		}
+		/* Remove arrow */
+		.slide::after {
+			display: none;
+		}
+		/* Slide with narrow margins */
+		.slide.narrow-margins {
+			padding: 53px 80px 0;
+		}
+
+		.slide_colorful h2 {
+			color: white;
+		}
+		.slide_theme_turquoise {
+			background-color: #2db2bf;
+		}
+		.slide_theme_raspberry {
+			background-color: #c50050;
+		}
+		.slide_theme_violet {
+			background-color: #8939a9;
+		}
+		.slide_theme_green {
+			background-color: #359c69;
+		}
+		.slide_theme_light-green {
+			background-color: #7ea91c;
+		}
+		.slide_theme_orange {
+			background-color: #E67014;
+		}
+
+		/* Code */
+		.slide .no-counter-code code::before {
+			display: none;
+		}
+		.split-code {
+    		float: left;
+    	}
+    	.split-code:first-child {
+    		width: 50%;
+    		margin-right: 30px;
+    	}
+    	.js-string {
+    		color: darkgoldenrod;
+    	}
+    	.js-boolean {
+    		color: magenta;
+    	}
+	</style>
 </head>
 <body class="shower list">
 	<header class="caption">
-		<h1>Shower Presentation Engine</h1>
-		<p>Yours Truly, Famous Inc.</p>
+		<h1>Оптимизируй сборку!</h1>
+		<p>Vladimir Rakchaev, NBCO Yandex.Money LLC</p>
 	</header>
-	<section class="slide" id="cover">
-		<h2>Shower Presentation Engine</h2>
-		<p>Brought to you by <a href="http://pepelsbey.net">Vadim Makeev</a></p>
-		<img src="pictures/cover.jpg" alt="" class="cover">
-		<!--
-			To apply styles to the certain slides
-			set slide ID to get needed elements
-			-->
-		<style>
-			#cover h2 {
-				margin:30px 0 0;
-				color:#FFF;
-				text-align:center;
-				font-size:70px;
-				}
-			#cover p {
-				margin:10px 0 0;
-				text-align:center;
-				color:#FFF;
-				font-style:italic;
-				font-size:20px;
-				}
-				#cover p a {
-					color:#FFF;
-					}
-		</style>
+	<section class="slide cover-bg" style="background-image: url(pictures/title.jpg)" id="title">
+		<h2>Оптимизируй сборку!</h2>
 	</section>
-	<section class="slide">
-		<h2>Shower key features</h2>
-		<ol>
-			<li>Built on HTML, CSS and vanilla JavaScript</li>
-			<li>Works in all modern browsers</li>
-			<li>Themes are separated from engine</li>
-			<li>Modular and extensible</li>
-			<li>Fully keyboard accessible</li>
-			<li>Printable to PDF</li>
-		</ol>
-		<p class="note">Shower ['ʃəuə] noun. A person or thing that shows.</p>
+	<section class="slide slide_colorful slide_theme_turquoise">
+		<h2 class="shout">История</h2>
 	</section>
-	<section class="slide">
-		<h2>Plain text on your slides</h2>
-		<p>Lorem ipsum dolor sit amet, consectetur <a href="#4">adipisicing</a> elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, <em>quis nostrud</em> exercitation ullamco laboris <strong>nisi ut aliquip</strong> ex ea commodo consequat. Duis aute irure <i>dolor</i> in reprehenderit in voluptate velit esse cillum <b>dolore</b> eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in <code>&lt;culpa&gt;</code> qui officia deserunt mollit anim id est laborum.</p>
+	<section class="slide narrow-margins narrow-margins">
+		<pre class="no-counter-code split-code">
+			<code>blocks</code>
+			<code>|-- yamoney</code>
+			<code>`-- islands</code>
+			<code>libs</code>
+			<code>`-- islands-*</code>
+		</pre>
+		<pre class="no-counter-code split-code">
+			<code>bundles</code>
+			<code>`-- common</code>
+		</pre>
 	</section>
-	<section class="slide">
-		<h2>Two columns if you like</h2>
-		<p class="double">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia.</p>
+	<section class="slide narrow-margins">
+		<pre class="no-counter-code split-code">
+			<code>blocks</code>
+			<code>|-- yamoney</code>
+			<code>|-- islands</code>
+			<code>`-- <mark>projects</mark></code>
+			<code>libs</code>
+			<code>`-- islands-*</code>
+		</pre>
+		<pre class="no-counter-code split-code">
+			<code>bundles</code>
+			<code>|-- common</code>
+			<code>|-- <mark>projects</mark></code>
+			<code>|   `-- <mark>...</mark></code>
+			<code>`-- <mark>merged</mark></code>
+		</pre>
 	</section>
-	<section class="slide">
-		<h2>All kind of lists</h2>
-		<ol>
-			<li>Simple lists are marked with bullets</li>
-			<li>Ordered lists begin with a number</li>
-			<li>You can even nest lists one inside another
-				<ul>
-					<li>Or mix their types</li>
-					<li>But do not go too far</li>
-					<li>Otherwise audience will be bored</li>
-				</ul>
-			</li>
-			<li>Look, seven rows exactly!</li>
-		</ol>
+	<section class="slide narrow-margins">
+		<pre class="no-counter-code split-code">
+			<code>blocks</code>
+			<code>|-- <mark>full-site</mark></code>
+			<code>|   |-- yamoney</code>
+			<code>|   |-- islands</code>
+			<code>|   `-- projects</code>
+			<code>`-- <mark>mobile-site</mark></code>
+			<code>    |-- <mark>yamoney</mark></code>
+			<code>    `-- <mark>o2</mark></code>
+			<code>libs</code>
+			<code>|-- <mark>bem-co*</mark></code>
+			<code>`-- islands-*</code>
+		</pre>
+		<pre class="no-counter-code split-code">
+			<code>bundles</code>
+			<code>|-- <mark>full-site</mark></code>
+			<code>|   |-- common</code>
+			<code>|   |-- projects</code>
+			<code>|   |   `-- ...</code>
+			<code>|   `-- merged</code>
+			<code>`-- <mark>mobile-site</mark></code>
+			<code>    `--- <mark>common</mark></code>
+		</pre>
 	</section>
-	<section class="slide">
-		<h2>Serious citations</h2>
-		<figure>
-			<blockquote>
-				<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia.</p>
-			</blockquote>
-			<figcaption>Marcus Tullius Cicero</figcaption>
-		</figure>
+	<section class="slide narrow-margins">
+		<pre class="no-counter-code split-code">
+			<code>blocks</code>
+			<code>|-- full-site</code>
+			<code>|   |-- yamoney</code>
+			<code>|   |-- islands</code>
+			<code>|   `-- projects</code>
+			<code>`-- mobile-site</code>
+			<code>    |-- yamoney</code>
+			<code>    |-- o2</code>
+			<code>    `-- <mark>projects</mark></code>
+			<code>libs</code>
+		</pre>
+		<pre class="no-counter-code split-code">
+			<code>bundles</code>
+			<code>|-- full-site</code>
+			<code>|   |-- common</code>
+			<code>|   |-- projects</code>
+			<code>|   |   `-- ...</code>
+			<code>|   `-- merged</code>
+			<code>`-- mobile-site</code>
+			<code>    |--- common</code>
+			<code>    |-- <mark>projects</mark></code>
+			<code>    |   `-- <mark>...</mark></code>
+			<code>    `-- <mark>merged</mark></code>
+		</pre>
 	</section>
-	<section class="slide">
-		<h2>Code samples</h2>
-		<pre>
-			<code>&lt;!DOCTYPE html&gt;</code>
-			<code class="mark">&lt;html lang="en"&gt;</code>
-			<code><mark>&lt;head&gt;</mark> <span class="comment">&lt;!--Comment--&gt;</span></code>
-			<code>    &lt;title&gt;Shower&lt;/title&gt;</code>
-			<code>    &lt;meta charset="<mark class="important">UTF-8</mark>"&gt;</code>
-			<code>    &lt;link rel="stylesheet" href="screen.css"&gt;</code>
-			<code><mark>&lt;/head&gt;</mark></code>
+	<section class="slide narrow-margins">
+		<pre class="no-counter-code split-code">
+			<code>blocks</code>
+			<code>|-- full-site</code>
+			<code>|   |-- yamoney</code>
+			<code>|   |   <mark>|-- common.blocks</mark></code>
+			<code>|   |   <mark>|-- deskpad.blocks</mark></code>
+			<code>|   |   <mark>|-- desktop.blocks</mark></code>
+			<code>|   |   <mark>|-- touch-pad.blocks</mark></code>
+			<code>|   |   <mark>|-- touch-phone.blocks</mark></code>
+			<code>|   |   <mark>`-- touch.blocks</mark></code>
+			<code>|   ...</code>
+			<code>libs</code>
+		</pre>
+		<pre class="no-counter-code split-code">
+			<code>bundles</code>
+			<code>|-- <mark>desktop</mark></code>
+			<code>|   |-- common</code>
+			<code>|   |-- projects</code>
+			<code>|   |   `-- ...</code>
+			<code>|   `-- merged</code>
+			<code>|-- <mark>touch-pad</mark></code>
+			<code>|   `-- ...</code>
+			<code>`-- <mark>touch-phone</mark></code>
+			<code>    `-- ...</code>
 		</pre>
 	</section>
 	<section class="slide">
-		<h2>Even tables</h2>
-		<table>
-		<tr>
-			<th scope="col">Locavore</th>
-			<th>Umami</th>
-			<th>Helvetica</th>
-			<th>Vegan</th>
-		</tr>
-		<tr>
-			<th scope="row">Fingerstache</th>
-			<td>Kale</td>
-			<td>Chips</td>
-			<td>Keytar</td>
-		</tr>
-		<tr>
-			<th scope="row">Sriracha</th>
-			<td>Gluten-free</td>
-			<td>Ennui</td>
-			<td>Keffiyeh</td>
-		</tr>
-		<tr>
-			<th scope="row">Thundercats</th>
-			<td>Jean</td>
-			<td>Shorts</td>
-			<td>Biodiesel</td>
-		</tr>
-		<tr>
-			<th scope="row">Terry</th>
-			<td>Richardson</td>
-			<td>Swag</td>
-			<td>Blog</td>
-		</tr>
-		</table>
-		<p>It’s good to have information organized.</p>
+		<h2>А еще</h2>
+		<ul>
+			<li class="next">Плюс старый <code>mobile-site</code></li>
+			<li class="next">Плюс <code>isomorphic-libs</code></li>
+			<li class="next">Плюс тесты</li>
+		</ul>
 	</section>
-	<section class="slide" id="picture">
-		<h2>Pictures</h2>
-		<img src="pictures/picture.jpg" alt="" class="cover">
+	<section class="slide cover-bg" style="background-image: url(pictures/cat.jpg)" id="subbotnik">
 		<style>
-			#picture h2 {
-				color:#FFF;
-				}
+			#subbotnik h2 {
+				color: #fff;
+				text-shadow: 0 0 30px #000;
+			}
 		</style>
+		<h2 class="shout next">Субботник!</h2>
+	</section>
+	<section class="slide slide slide_colorful slide_theme_raspberry">
+		<h2 class="shout">го оптимизировать? <span class="next">я&nbsp;создал.</span></h2>
+	</section>
+	<section class="slide slide slide_colorful slide_theme_turquoise">
+		<h2 class="shout">&mdash;&nbsp;Обнови enb и технологии!</h2>
+	</section>
+	<section class="slide slide slide_colorful slide_theme_green">
+		<h2 class="shout">&mdash;&nbsp;Шаблонизируй на свежем bem&#8209;xjst!</h2>
+	</section>
+	<section class="slide cover-bg" style="background-image: url(pictures/borschik.jpg)" id="borschik">
+		<style>
+			#borschik h2 {
+				color: #fff;
+				text-shadow: 0 0 30px #000;
+			}
+		</style>
+		<h2 class="shout">&mdash;&nbsp;Откажись от borschik'а!</h2>
+	</section>
+
+[
+  require('postcss-url')({
+    url: 'inline',
+    maxSize: 1,
+    fallback: function (URL, decl, from, dirname, to, options, result) {
+      // Для абсолютных путей ничего преобразовывать не нужно.
+      // Перейти на path.isAbsolutePath при обновлении nodejs.
+      if (URL.charAt(0) === '/') {
+        return URL;
+      }
+     }
+  }),
+  require('postcss-copy')({
+    src: ['blocks/', 'libs/'],
+    dest: 'static/_/',
+    relativePath: function(dirname, fileMeta, result, opts) {
+      return opts.dest;
+    }
+  }),
+  require('postcss-url')({
+    url: function (URL, decl, from, dirname, to, options, result) {
+      if (URL.substring(0, 4) !== 'data') {
+        return '/b/_/' + URL;
+      }
+    }
+  })
+]
+
+[
+  require('postcss-url')({
+    url: 'inline',
+    maxSize: 0.5,
+    fallback: function (URL, decl, from, dirname, to, options, result) {
+      // Для сылок на yastatic и /i/ ничего преобразовывать не нужно.
+      // Перейти на path.isAbsolutePath при обновлении nodejs.
+      if (URL.charAt(0) === '/') {
+          return URL;
+      }
+    }
+  }),
+  require('postcss-copy')({
+    src: ['blocks/', 'libs/'],
+    dest: 'static/_/',
+    hashFunction: function(contents) {
+      // Хэш как в borschik для использования готовых ресурсов с yastatic.net
+      return crypto.createHash('sha1')
+        .update(contents)
+        .digest('base64')
+        .replace(/\+/g, '-')
+        .replace(/\//g, '_')
+        .replace(/=/g, '')
+        .replace(/^[+-]+/g, '');
+    },
+    relativePath: function(dirname, fileMeta, result, opts) {
+      return opts.dest;
+    }
+  }),
+  require('postcss-url')({
+    url: function (URL, decl, from, dirname, to, options, result) {
+      var islandsDir = path.resolve('libs', 'islands');
+      var isIslandsResource = path.relative(islandsDir, dirname).substring(0, 2) !== '..';
+      var baseStaticUrl = isIslandsResource ? '//yastatic.net/islands/_/' : '/b/_/';
+
+      if (URL.substring(0, 4) !== 'data') {
+        return baseStaticUrl + URL;
+      }
+    }
+  })
+]
+
+	<section class="slide slide slide_colorful slide_theme_violet">
+		<h2 class="shout">&mdash;&nbsp;Собирай только нужное!</h2>
 	</section>
 	<section class="slide">
-		<h2 class="shout shrink">You can even shout this way</h2>
+		<pre>
+			<code>{</code>
+			<code>    onlyProjects: [<span class="js-string">'office'</span>],</code>
+			<code>    platforms: [<span class="js-string">'desktop'</span>],</code>
+			<code>    langs: [<span class="js-string">'ru'</span>],</code>
+			<code>    needIeCss: <span class="js-boolean">false</span>,</code>
+			<code>    needMobileSite: <span class="js-boolean">false</span>,</code>
+			<code>    needOldSite: <span class="js-boolean">false</span>,</code>
+			<code>    needIsomorphicLib: <span class="js-boolean">false</span></code>
+			<code>}</code>
+		</pre>
 	</section>
-	<section class="slide">
-		<h2>Inner navigation</h2>
-		<ol>
-			<li>Lets you reveal list items one by one</li>
-			<li class="next">To keep some key points</li>
-			<li class="next">In secret from audience</li>
-			<li class="next">But it will work only once</li>
-			<li class="next">Nobody wants to see the same joke twice</li>
-		</ol>
+	<section class="slide slide slide_colorful slide_theme_light-green">
+		<h2 class="shout">&mdash;&nbsp;Собирай на&nbsp;свежей ноде!</h2>
 	</section>
-	<section class="slide grid">
-		<h2>All nicely aligned to grid</h2>
-	</section>
-	<section class="slide" id="see-more">
-		<h2 class="shout">
-			<img src="pictures/logo.svg" alt="Shower logo">
-			<a href="https://github.com/shower/shower">See more on GitHub</a>
-		</h2>
-		<style>
-			#see-more h2 {
-				font-size:100px
-				}
-			#see-more img {
-				width:0.72em;
-				height:0.72em;
-				}
-		</style>
+	<section class="slide slide slide_colorful slide_theme_orange">
+		<h2 class="shout">&mdash;&nbsp;Закажи апгрейд железа!</h2>
 	</section>
 	<p class="badge">
 		<a href="https://github.com/shower/shower">Fork me on GitHub</a>
