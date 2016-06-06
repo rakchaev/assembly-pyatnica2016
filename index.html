@@ -55,6 +55,11 @@
 			background-color: #E67014;
 		}
 
+		.slide h3 {
+		    color: #585a5e;
+    		font: 700 45px/1 PT Sans Narrow,sans-serif;
+		}
+
 		/* Code */
 		.slide .no-counter-code code::before {
 			display: none;
@@ -69,9 +74,24 @@
     	.js-string {
     		color: darkgoldenrod;
     	}
-    	.js-boolean {
-    		color: magenta;
+    	.js-boolean, .js-number {
+    		color: darkviolet;
     	}
+    	.js-comment {
+    		color: #999;
+    	}
+    	.js-keyword {
+    		color: royalblue;
+    	}
+    	.js-return {
+    		color: hotpink;
+    	}
+    	.cl-grey {
+			color: #999;
+		}
+		.cl-red {
+			color: #c00;
+		}
 	</style>
 </head>
 <body class="shower list">
@@ -199,6 +219,7 @@
 		<ul>
 			<li class="next">Плюс старый <code>mobile-site</code></li>
 			<li class="next">Плюс <code>isomorphic-libs</code></li>
+			<li class="next">Плюс восемь языков</li>
 			<li class="next">Плюс тесты</li>
 		</ul>
 	</section>
@@ -211,13 +232,25 @@
 		</style>
 		<h2 class="shout next">Субботник!</h2>
 	</section>
-	<section class="slide slide slide_colorful slide_theme_raspberry">
-		<h2 class="shout">го оптимизировать? <span class="next">я&nbsp;создал.</span></h2>
+	<section class="slide slide_colorful slide_theme_raspberry">
+		<h2 class="shout">Оптимизация</h2>
 	</section>
-	<section class="slide slide slide_colorful slide_theme_turquoise">
+	<section class="slide slide_colorful slide_theme_turquoise">
 		<h2 class="shout">&mdash;&nbsp;Обнови enb и технологии!</h2>
 	</section>
-	<section class="slide slide slide_colorful slide_theme_green">
+	<section class="slide">
+		<pre class="no-counter-code">
+			<code><span class="cl-grey">16:51:18.360 - </span>build started</code>
+			<code>...</code>
+			<code><span class="cl-grey">16:51:21.633 - </span>build finished - <span class="cl-red">3273ms</span></code>
+		</pre>
+		<pre class="no-counter-code next" style="margin-top: 100px">
+			<code><span class="cl-grey">16:55:43.139 - </span>build started</code>
+			<code>...</code>
+			<code><span class="cl-grey">16:55:46.111 - </span>build finished - <span class="cl-red">4567ms</span></code>
+		</pre>
+	</section>
+	<section class="slide slide_colorful slide_theme_green">
 		<h2 class="shout">&mdash;&nbsp;Шаблонизируй на свежем bem&#8209;xjst!</h2>
 	</section>
 	<section class="slide cover-bg" style="background-image: url(pictures/borschik.jpg)" id="borschik">
@@ -229,78 +262,105 @@
 		</style>
 		<h2 class="shout">&mdash;&nbsp;Откажись от borschik'а!</h2>
 	</section>
-
-[
-  require('postcss-url')({
-    url: 'inline',
-    maxSize: 1,
-    fallback: function (URL, decl, from, dirname, to, options, result) {
-      // Для абсолютных путей ничего преобразовывать не нужно.
-      // Перейти на path.isAbsolutePath при обновлении nodejs.
-      if (URL.charAt(0) === '/') {
-        return URL;
-      }
-     }
-  }),
-  require('postcss-copy')({
-    src: ['blocks/', 'libs/'],
-    dest: 'static/_/',
-    relativePath: function(dirname, fileMeta, result, opts) {
-      return opts.dest;
-    }
-  }),
-  require('postcss-url')({
-    url: function (URL, decl, from, dirname, to, options, result) {
-      if (URL.substring(0, 4) !== 'data') {
-        return '/b/_/' + URL;
-      }
-    }
-  })
-]
-
-[
-  require('postcss-url')({
-    url: 'inline',
-    maxSize: 0.5,
-    fallback: function (URL, decl, from, dirname, to, options, result) {
-      // Для сылок на yastatic и /i/ ничего преобразовывать не нужно.
-      // Перейти на path.isAbsolutePath при обновлении nodejs.
-      if (URL.charAt(0) === '/') {
-          return URL;
-      }
-    }
-  }),
-  require('postcss-copy')({
-    src: ['blocks/', 'libs/'],
-    dest: 'static/_/',
-    hashFunction: function(contents) {
-      // Хэш как в borschik для использования готовых ресурсов с yastatic.net
-      return crypto.createHash('sha1')
-        .update(contents)
-        .digest('base64')
-        .replace(/\+/g, '-')
-        .replace(/\//g, '_')
-        .replace(/=/g, '')
-        .replace(/^[+-]+/g, '');
-    },
-    relativePath: function(dirname, fileMeta, result, opts) {
-      return opts.dest;
-    }
-  }),
-  require('postcss-url')({
-    url: function (URL, decl, from, dirname, to, options, result) {
-      var islandsDir = path.resolve('libs', 'islands');
-      var isIslandsResource = path.relative(islandsDir, dirname).substring(0, 2) !== '..';
-      var baseStaticUrl = isIslandsResource ? '//yastatic.net/islands/_/' : '/b/_/';
-
-      if (URL.substring(0, 4) !== 'data') {
-        return baseStaticUrl + URL;
-      }
-    }
-  })
-]
-
-	<section class="slide slide slide_colorful slide_theme_violet">
+	<section class="slide">
+		<h2>Зачем?</h2>
+		<ul>
+			<li class="next">Инструмент под задачу</li>
+			<li class="next">Поддержка проекта</li>
+		</ul>
+	</section>
+	<section class="slide">
+		<h2>Что есть в борщике</h2>
+		<ul>
+			<li class="next">Минифкация js</li>
+			<li class="next">Минифкация css</li>
+			<li class="next">Обработка ресурсов (фризинг, инлайнинг)</li>
+			<li class="next">borschik include</li>
+		</ul>
+	</section>
+	<section class="slide narrow-margins">
+		<h3>Минифкация js</h3>
+		<h2 class="shout next"><a href="https://github.com/rakchaev/enb-uglifyjs">enb-uglifyjs</a></h2>
+	</section>
+	<section class="slide narrow-margins">
+		<h3>Минифкация css</h3>
+		<h2 class="shout next"><a href="https://github.com/lahmatiy/postcss-csso">postcss-csso</a></h2>
+	</section>
+	<section class="slide narrow-margins">
+		<h3>Обработка ресурсов (фризинг, инлайнинг)</h3>
+		<h2 class="shout next">
+			<a href="https://github.com/postcss/postcss-url">postcss-url</a>
+			<a href="https://github.com/geut/postcss-copy">postcss-copy</a>
+		</h2>
+	</section>
+	<section class="slide narrow-margins">
+		<pre>
+			<code>require(<span class="js-string">'postcss-url'</span>)({</code>
+			<code>  url: <span class="js-string">'inline'</span>,</code>
+			<code>  maxSize: <span class="js-number">0.5</span>,</code>
+			<code>  fallback: <span class="js-keyword">function</span> (URL) {</code>
+			<code>    <span class="comment">// Для абсолютных путей ничего преобразовывать не нужно.</span></code>
+			<code>    <span class="comment">// Перейти на path.isAbsolutePath при обновлении nodejs.</span></code>
+			<code>    <span class="js-keyword">if</span> (URL.charAt(<span class="js-number">0</span>) === <span class="js-string">'/'</span>) {</code>
+			<code>        <span class="js-return">return</span> URL;</code>
+			<code>    }</code>
+			<code>  }</code>
+			<code>})</code>
+		</pre>
+	</section>
+	<section class="slide narrow-margins">
+		<pre>
+			<code>require(<span class="js-string">'postcss-copy'</span>)({</code>
+			<code>  src: [<span class="js-string">'blocks/'</span>, <span class="js-string">'libs/'</span>],</code>
+			<code>  dest: <span class="js-string">'static/_/'</span>,</code>
+			<code>  hashFunction: <span class="js-keyword">function</span> (contents) {<span class="js-comment">...</span>},</code>
+			<code>  relativePath: <span class="js-keyword">function</span> (dirname, fileMeta, result, opts) {</code>
+			<code>    <span class="js-return">return</span> opts.dest;</code>
+			<code>  }</code>
+			<code>})</code>
+		</pre>
+	</section>
+	<section class="slide narrow-margins">
+		<pre>
+			<code>hashFunction: <span class="js-keyword">function</span> (contents) {</code>
+			<code>  <span class="js-comment">// Хэш как в borschik для использования ресурсов с yastatic</span></code>
+			<code>  <span class="js-return">return</span> crypto.createHash(<span class="js-string">'sha1'</span>)</code>
+			<code>    .update(contents)</code>
+			<code>    .digest(<span class="js-string">'base64'</span>)</code>
+			<code>    .replace(/\+/g, <span class="js-string">'-'</span>)</code>
+			<code>    .replace(/\//g, <span class="js-string">'_'</span>)</code>
+			<code>    .replace(/=/g, <span class="js-string">''</span>)</code>
+			<code>    .replace(/^[+-]+/g, <span class="js-string">''</span>);</code>
+			<code>}</code>
+		</pre>
+	</section>
+	<section class="slide narrow-margins" style="padding-top: 30px">
+		<pre>
+			<code>require(<span class="js-string">'postcss-url'</span>)({</code>
+			<code>  url: <span class="js-keyword">function</span> (URL, decl, from, dirname, to, options) {</code>
+			<code>    <span class="js-keyword">var</span> islandsDir = path.resolve(<span class="js-string">'libs'</span>, <span class="js-string">'islands'</span>);</code>
+			<code>    <span class="js-keyword">var</span> isIslandsResource = path.relative(islandsDir, dirname)</code>
+			<code>            .substring(<span class="js-number">0</span>, <span class="js-number">2</span>) !== <span class="js-string">'..'</span>;</code>
+			<code>    <span class="js-keyword">var</span> baseStaticUrl = isIslandsResource</code>
+			<code>            ? <span class="js-string">'//yastatic.net/islands/_/'</span> : <span class="js-string">'/b/_/'</span>;</code>
+			<code>    <span class="js-keyword">if</span> (URL.substring(<span class="js-number">0</span>, <span class="js-number">4</span>) !== <span class="js-string">'data'</span>) {</code>
+			<code>      <span class="js-return">return</span> baseStaticUrl + URL;</code>
+			<code>    }</code>
+			<code>  }</code>
+			<code>})</code>
+		</pre>
+	</section>
+	<section class="slide narrow-margins">
+		<h3>borschik include</h3>
+		<h2 class="shout next">Модульные системы</h2>
+	</section>
+	<section class="slide slide_colorful slide_theme_raspberry">
+		<h2 class="shout">&mdash;&nbsp;Трансформируй потоком!</h2>
+	</section>
+	<section class="slide slide_colorful slide_theme_turquoise">
+		<h2 class="shout">&mdash;&nbsp;Не требуй лишнего!</h2>
+	</section>
+	<section class="slide slide_colorful slide_theme_violet">
 		<h2 class="shout">&mdash;&nbsp;Собирай только нужное!</h2>
 	</section>
 	<section class="slide">
@@ -316,11 +376,58 @@
 			<code>}</code>
 		</pre>
 	</section>
-	<section class="slide slide slide_colorful slide_theme_light-green">
+	<section class="slide slide_colorful slide_theme_light-green">
 		<h2 class="shout">&mdash;&nbsp;Собирай на&nbsp;свежей ноде!</h2>
 	</section>
-	<section class="slide slide slide_colorful slide_theme_orange">
+	<section class="slide slide_colorful slide_theme_orange">
 		<h2 class="shout">&mdash;&nbsp;Закажи апгрейд железа!</h2>
+	</section>
+	<section class="slide slide_colorful slide_theme_raspberry">
+		<h2 class="shout">Итоги</h2>
+	</section>
+	<section class="slide slide_colorful slide_theme_raspberry">
+		<table>
+			<tbody><tr>
+				<th scope="col">Locavore</th>
+				<th>Umami</th>
+				<th>Helvetica</th>
+				<th>Vegan</th>
+			</tr>
+			<tr>
+				<th scope="row">Fingerstache</th>
+				<td>Kale</td>
+				<td>Chips</td>
+				<td>Keytar</td>
+			</tr>
+			<tr>
+				<th scope="row">Sriracha</th>
+				<td>Gluten-free</td>
+				<td>Ennui</td>
+				<td>Keffiyeh</td>
+			</tr>
+			<tr>
+				<th scope="row">Thundercats</th>
+				<td>Jean</td>
+				<td>Shorts</td>
+				<td>Biodiesel</td>
+			</tr>
+			<tr>
+				<th scope="row">Terry</th>
+				<td>Richardson</td>
+				<td>Swag</td>
+				<td>Blog</td>
+			</tr>
+			</tbody>
+		</table>
+	</section>
+	<section class="slide">
+		<ul>
+			<li class="next">Получили профит от железа</li>
+			<li class="next">Получили профит сборки</li>
+			<li class="next">Еще добьем <code>bem-xjst</code> и расширим использование <code>enb-transform-flow</code></li>
+			<li class="next">Разобрались во внутренностях сборки</li>
+			<li class="next">Получили опыт</li>
+		</ul>
 	</section>
 	<p class="badge">
 		<a href="https://github.com/shower/shower">Fork me on GitHub</a>
