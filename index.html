@@ -92,6 +92,7 @@
 		.cl-red {
 			color: #c00;
 		}
+
 	</style>
 </head>
 <body class="shower list">
@@ -293,22 +294,21 @@
 			<a href="https://github.com/geut/postcss-copy">postcss-copy</a>
 		</h2>
 	</section>
-	<section class="slide narrow-margins">
+	<section class="slide">
 		<pre>
 			<code>require(<span class="js-string">'postcss-url'</span>)({</code>
 			<code>  url: <span class="js-string">'inline'</span>,</code>
 			<code>  maxSize: <span class="js-number">0.5</span>,</code>
 			<code>  fallback: <span class="js-keyword">function</span> (URL) {</code>
 			<code>    <span class="comment">// Для абсолютных путей ничего преобразовывать не нужно.</span></code>
-			<code>    <span class="comment">// Перейти на path.isAbsolutePath при обновлении nodejs.</span></code>
-			<code>    <span class="js-keyword">if</span> (URL.charAt(<span class="js-number">0</span>) === <span class="js-string">'/'</span>) {</code>
+			<code>    <span class="js-keyword">if</span> (path.isAbsolute(URL)) {</code>
 			<code>        <span class="js-return">return</span> URL;</code>
 			<code>    }</code>
 			<code>  }</code>
 			<code>})</code>
 		</pre>
 	</section>
-	<section class="slide narrow-margins">
+	<section class="slide">
 		<pre>
 			<code>require(<span class="js-string">'postcss-copy'</span>)({</code>
 			<code>  src: [<span class="js-string">'blocks/'</span>, <span class="js-string">'libs/'</span>],</code>
@@ -320,7 +320,7 @@
 			<code>})</code>
 		</pre>
 	</section>
-	<section class="slide narrow-margins">
+	<section class="slide">
 		<pre>
 			<code>hashFunction: <span class="js-keyword">function</span> (contents) {</code>
 			<code>  <span class="js-comment">// Хэш как в borschik для использования ресурсов с yastatic</span></code>
@@ -343,7 +343,7 @@
 			<code>            .substring(<span class="js-number">0</span>, <span class="js-number">2</span>) !== <span class="js-string">'..'</span>;</code>
 			<code>    <span class="js-keyword">var</span> baseStaticUrl = isIslandsResource</code>
 			<code>            ? <span class="js-string">'//yastatic.net/islands/_/'</span> : <span class="js-string">'/b/_/'</span>;</code>
-			<code>    <span class="js-keyword">if</span> (URL.substring(<span class="js-number">0</span>, <span class="js-number">4</span>) !== <span class="js-string">'data'</span>) {</code>
+			<code>    <span class="js-keyword">if</span> (!path.isAbsolute(URL) &amp;&amp; URL.substring(<span class="js-number">0</span>,<span class="js-number">4</span>)!==<span class="js-string">'data'</span>){</code>
 			<code>      <span class="js-return">return</span> baseStaticUrl + URL;</code>
 			<code>    }</code>
 			<code>  }</code>
@@ -356,6 +356,254 @@
 	</section>
 	<section class="slide slide_colorful slide_theme_raspberry">
 		<h2 class="shout">&mdash;&nbsp;Трансформируй потоком!</h2>
+	</section>
+	<section class="slide">
+		<h2 class="shout"><a href="https://github.com/MrKashlakov/enb-transform-flow">enb-transform-flow</a></h2>
+	</section>
+	<section class="slide">
+		<style>
+.transform-line {
+	margin-bottom: 60px;
+}
+.transform-line__label {
+    width: 150px;
+    display: inline-block;
+}
+.square {
+	width: 50px;
+	height: 50px;
+	display: inline-block;
+}
+.square_theme_blue {
+	background-color: lightblue;
+}
+.square_theme_violet {
+	background-color: violet;
+}
+.square_theme_green {
+	background-color: yellowgreen;
+}
+.circle {
+	width: 50px;
+	height: 50px;
+	display: inline-block;
+	-moz-border-radius: 25px;
+	-webkit-border-radius: 25px;
+	border-radius: 25px;
+}
+.circle_theme_blue {
+	background-color: lightblue;
+}
+.circle_theme_violet {
+	background-color: violet;
+}
+.circle_theme_green {
+	background-color: yellowgreen;
+}
+.triangle-up {
+	width: 0;
+	height: 0;
+	border-left: 25px solid transparent;
+	border-right: 25px solid transparent;
+	border-bottom: 50px solid white;
+	display: inline-block;
+}
+.triangle-up_theme_blue {
+	border-bottom-color: lightblue;
+}
+.triangle-up_theme_violet {
+	border-bottom-color: violet;
+}
+.triangle-up_theme_green {
+	border-bottom-color: yellowgreen;
+}
+.hexagon {
+	width: 50px;
+	height: 27px;
+	top: 12px;
+	display: inline-block;
+	position: relative;
+}
+.hexagon:before {
+	content: "";
+	position: absolute;
+	top: -12px; 
+	left: 0;
+	width: 0;
+	height: 0;
+	border-left: 25px solid transparent;
+	border-right: 25px solid transparent;
+	border-bottom: 12px solid white;
+}
+.hexagon:after {
+	content: "";
+	position: absolute;
+	bottom: -12px; 
+	left: 0;
+	width: 0;
+	height: 0;
+	border-left: 25px solid transparent;
+	border-right: 25px solid transparent;
+	border-top: 12px solid white;
+}
+.hexagon_theme_blue {
+	background-color: lightblue;
+}
+.hexagon_theme_blue:before {
+	border-bottom-color: lightblue;
+}
+.hexagon_theme_blue:after {
+	border-top-color: lightblue;
+}
+.hexagon_theme_violet {
+	background-color: violet;
+}
+.hexagon_theme_violet:before {
+	border-bottom-color: violet;
+}
+.hexagon_theme_violet:after {
+	border-top-color: violet;
+}
+.hexagon_theme_green {
+	background-color: yellowgreen;
+}
+.hexagon_theme_green:before {
+	border-bottom-color: yellowgreen;
+}
+.hexagon_theme_green:after {
+	border-top-color: yellowgreen;
+}
+.hexagon_theme_colorful {
+	background-color: violet;
+}
+.hexagon_theme_colorful:before {
+	border-bottom-color: lightblue;
+}
+.hexagon_theme_colorful:after {
+	border-top-color: yellowgreen;
+}
+
+.function {
+    width: 100px;
+    height: 27px;
+    display: inline-block;
+    border-bottom: 5px solid white;
+	position: relative;
+}
+.function_theme_blue {
+    border-bottom-color: lightblue;
+}
+.function_theme_violet {
+    border-bottom-color: violet;
+}
+.function_theme_green {
+    border-bottom-color: yellowgreen;
+}
+.function:before {
+	content: "";
+	position: absolute;
+	top: -50px;
+    left: 35px;
+	font-size: 35px;
+}
+.function_f1:before {
+	content: "f1";
+}
+.function_f2:before {
+	content: "f2";
+}
+.function_f3:before {
+	content: "f3";
+}
+.function_tilt_down {
+    transform: rotate(45deg);
+    top: 35px;
+    left: 0px;
+    width: 75px;
+}
+.function_tilt_up {
+    transform: rotate(-45deg);
+    top: -28px;
+    left: -15px;
+    width: 75px;
+}
+.function_file-cache {
+    width: 426px;
+    border-bottom-style: dashed;
+}
+.function_file-cache:before {
+	content: "file cache";
+	left: 145px;
+}
+		</style>
+		<div class="transform-line">
+			<span class="transform-line__label">header.js:</span>
+			<div class="square square_theme_blue">&nbsp;</div>
+			<div class="function function_theme_blue function_f1">&nbsp;</div>
+			<div class="circle circle_theme_blue">&nbsp;</div>
+			<div class="function function_theme_blue function_f2">&nbsp;</div>
+			<div class="triangle-up triangle-up_theme_blue">&nbsp;</div>
+			<div class="function function_theme_blue function_f3">&nbsp;</div>
+			<div class="hexagon hexagon_theme_blue">&nbsp;</div>
+			<div class="function function_theme_blue function_tilt_down">&nbsp;</div>
+		</div>
+		<div class="transform-line">
+			<span class="transform-line__label">form.js:</span>
+			<div class="square square_theme_violet">&nbsp;</div>
+			<div class="function function_theme_violet function_f1">&nbsp;</div>
+			<div class="circle circle_theme_violet">&nbsp;</div>
+			<div class="function function_theme_violet function_f2">&nbsp;</div>
+			<div class="triangle-up triangle-up_theme_violet">&nbsp;</div>
+			<div class="function function_theme_violet function_f3">&nbsp;</div>
+			<div class="hexagon hexagon_theme_violet">&nbsp;</div>
+			<div class="function function_theme_violet" style="width: 50px;">&nbsp;</div>
+			<div class="hexagon hexagon_theme_colorful">&nbsp;</div>
+		</div>
+		<div class="transform-line">
+			<span class="transform-line__label">cart.js:</span>
+			<div class="square square_theme_green">&nbsp;</div>
+			<div class="function function_theme_green function_f1">&nbsp;</div>
+			<div class="circle circle_theme_green">&nbsp;</div>
+			<div class="function function_theme_green function_f2">&nbsp;</div>
+			<div class="triangle-up triangle-up_theme_green">&nbsp;</div>
+			<div class="function function_theme_green function_f3">&nbsp;</div>
+			<div class="hexagon hexagon_theme_green">&nbsp;</div>
+			<div class="function function_theme_green function_tilt_up">&nbsp;</div>
+		</div>
+		<div class="transform-line">
+			<span class="transform-line__label">...</span>
+		</div>
+	</section>
+	<section class="slide">
+		<div class="transform-line">
+			<span class="transform-line__label">header.js:</span>
+			<div class="square square_theme_blue">&nbsp;</div>
+			<div class="function function_theme_blue function_file-cache">&nbsp;</div>
+			<div class="hexagon hexagon_theme_blue">&nbsp;</div>
+			<div class="function function_theme_blue function_tilt_down">&nbsp;</div>
+		</div>
+		<div class="transform-line">
+			<span class="transform-line__label">form.js:</span>
+			<div class="square square_theme_violet">&nbsp;</div>
+			<div class="function function_theme_violet function_file-cache">&nbsp;</div>
+			<div class="hexagon hexagon_theme_violet">&nbsp;</div>
+			<div class="function function_theme_violet" style="width: 50px;">&nbsp;</div>
+			<div class="hexagon hexagon_theme_colorful">&nbsp;</div>
+		</div>
+		<div class="transform-line">
+			<span class="transform-line__label">cart.js:</span>
+			<div class="square square_theme_green">&nbsp;</div>
+			<div class="function function_theme_green function_f1">&nbsp;</div>
+			<div class="circle circle_theme_green">&nbsp;</div>
+			<div class="function function_theme_green function_f2">&nbsp;</div>
+			<div class="triangle-up triangle-up_theme_green">&nbsp;</div>
+			<div class="function function_theme_green function_f3">&nbsp;</div>
+			<div class="hexagon hexagon_theme_green">&nbsp;</div>
+			<div class="function function_theme_green function_tilt_up">&nbsp;</div>
+		</div>
+		<div class="transform-line">
+			<span class="transform-line__label">...</span>
+		</div>
 	</section>
 	<section class="slide slide_colorful slide_theme_turquoise">
 		<h2 class="shout">&mdash;&nbsp;Не требуй лишнего!</h2>
