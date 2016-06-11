@@ -528,7 +528,7 @@
     width: 75px;
 }
 .function_file-cache {
-    width: 426px;
+    width: 427px;
     border-bottom-style: dashed;
 }
 .function_file-cache:before {
@@ -580,14 +580,14 @@
 			<div class="square square_theme_blue">&nbsp;</div>
 			<div class="function function_theme_blue function_file-cache">&nbsp;</div>
 			<div class="hexagon hexagon_theme_blue">&nbsp;</div>
-			<div class="function function_theme_blue function_tilt_down">&nbsp;</div>
+			<div class="function function_theme_blue function_tilt_down" style="left: -1px;">&nbsp;</div>
 		</div>
 		<div class="transform-line">
 			<span class="transform-line__label">form.js:</span>
 			<div class="square square_theme_violet">&nbsp;</div>
 			<div class="function function_theme_violet function_file-cache">&nbsp;</div>
 			<div class="hexagon hexagon_theme_violet">&nbsp;</div>
-			<div class="function function_theme_violet" style="width: 50px;">&nbsp;</div>
+			<div class="function function_theme_violet" style="width: 50px; left: -1px;">&nbsp;</div>
 			<div class="hexagon hexagon_theme_colorful">&nbsp;</div>
 		</div>
 		<div class="transform-line">
@@ -607,6 +607,87 @@
 	</section>
 	<section class="slide slide_colorful slide_theme_turquoise">
 		<h2 class="shout">&mdash;&nbsp;Не требуй лишнего!</h2>
+	</section>
+	<section class="slide narrow-margins" style="padding-top:22px; font-size:20px;">
+		<pre>
+			<code><span class="js-keyword">var</span> configureTasks = require(<span class="js-string">'./tasks'</span>);</code>
+			<code><span class="js-keyword">var</span> configureSpecs = require(<span class="js-string">'./common/specs'</span>);</code>
+			<code><span class="js-comment">...</span></code>
+			<code>module.exports = <span class="js-keyword">function</span>(config) {</code>
+			<code>	<span class="js-comment">// Настройка enb-задач</span></code>
+			<code>	configureTasks(config);</code>
+			<code>	<span class="js-comment">// Настройка сборки и запуска тестов на клиентский js</span></code>
+			<code>	configureSpecs(config);</code>
+			<code>	<span class="js-comment">// Настройка сборки и запуска тестов на шаблоны</span></code>
+			<code>	configureTmplSpecs(config);</code>
+			<code>	<span class="js-comment">// Настройка сборки bemdev-бандлов</span></code>
+			<code>	configureBemdevBundles(config);</code>
+			<code>	<span class="js-comment">// Настройка сборки бандлов для рантайма</span></code>
+			<code>	<span class="js-comment">...</span></code>
+			<code>};</code>
+		</pre>
+	</section>
+	<section class="slide narrow-margins" style="padding-top:22px;"">
+		<pre>
+			<code><span class="js-keyword">var</span> enbTanker = require(<span class="js-string">'enb-tanker-yamoney'</span>);</code>
+			<code>module.exports = <span class="js-keyword">function</span>(config) {</code>
+			<code>	config.includeConfig(<span class="js-string">'enb-tanker/enb-make'</span>);</code>
+			<code>	config.task(<span class="js-string">'verify-keys'</span>, <span class="js-keyword">function</span>(task) {</code>
+			<code>		<span class="js-return">return</span> enbTanker.verifyKeys().fail(exit);</code>
+			<code>	});</code>
+			<code>	config.task(<span class="js-string">'create-tanker-branch'</span>, <span class="js-keyword">function</span>(task) {</code>
+			<code>		<span class="js-return">return</span> enbTanker.createTankerBranch(task, config)</code>
+			<code>				.fail(exit);</code>
+			<code>	});</code>
+			<code>	<span class="js-comment">...</span></code>
+			<code>};</code>
+		</pre>
+	</section>
+	<section class="slide">
+		<pre>
+			<code>module.exports = <span class="js-keyword">function</span>(config) {</code>
+			<code>	config.includeConfig(<span class="js-string">'enb-bem-specs'</span>);</code>
+			<code></code>
+			<code>	<span class="js-keyword">var</span> specs = config.module(<span class="js-string">'enb-bem-specs'</span>)</code>
+			<code>			.createConfigurator(<span class="js-string">'specs'</span>);</code>
+			<code>	specs.configure({<span class="js-comment">...</span>});</code>
+			<code>};</code>
+		</pre>
+	</section>
+	<section class="slide">
+		<pre>
+			<code>module.exports = <span class="js-keyword">function</span>(config) {</code>
+			<code>	config.includeConfig(<span class="js-string">'enb-bem-tmpl-specs'</span>);</code>
+			<code></code>
+			<code>	<span class="js-keyword">var</span> tmplSpecs = config.module(<span class="js-string">'enb-bem-tmpl-specs'</span>)</code>
+			<code>			.createConfigurator(<span class="js-string">'tmpl-specs'</span>);</code>
+			<code>	tmplSpecs.configure({<span class="js-comment">...</span>});</code>
+			<code>};</code>
+		</pre>
+	</section>
+	<section class="slide">
+		<pre>
+			<code><span class="js-keyword">var</span> bemTechs = require(<span class="js-string">'enb-bem-techs'</span>);</code>
+			<code><span class="js-keyword">var</span> bemhtml = require(<span class="js-string">'enb-bemxjst/techs/bemhtml'</span>);</code>
+			<code><span class="js-keyword">var</span> i18nMergeKeysets = require(<span class="js-string">'enb-bem-i18n/techs/i18n...'</span>);</code>
+			<code><span class="js-keyword">var</span> i18nLangJs = require(<span class="js-string">'enb-bem-i18n/techs/i18n...'</span>);</code>
+			<code><span class="js-keyword">var</span> fileCopy = require(<span class="js-string">'enb/techs/file-copy'</span>);</code>
+			<code><span class="js-keyword">var</span> fileProvider = require(<span class="js-string">'enb/techs/file-provider'</span>);</code>
+			<code><span class="js-keyword">var</span> pubJsI18n = require(<span class="js-string">'enb-priv-js/techs/pub-js-i18n'</span>);</code>
+			<code><span class="js-keyword">var</span> prependModules = require(<span class="js-string">'enb-modules/techs/prepend...'</span>);</code>
+			<code><span class="js-comment">...</span></code>
+		</pre>
+	</section>
+	<section class="slide">
+		<pre>
+			<code>module.exports = <span class="js-keyword">function</span>(config) {</code>
+			<code>	config.mode(<span class="js-string">'tasks'</span>, <span class="js-keyword">function</span>(config) {...});</code>
+			<code>	config.mode(<span class="js-string">'tests'</span>, <span class="js-keyword">function</span>(config) {...});</code>
+			<code>	config.mode(<span class="js-string">'bemdev'</span>, <span class="js-keyword">function</span>(config) {...});</code>
+			<code>	config.mode(<span class="js-string">'development'</span>, <span class="js-keyword">function</span>(config) {...});</code>
+			<code>	config.mode(<span class="js-string">'production'</span>,<span class="js-keyword"> function</span>(config) {...});</code>
+			<code>}</code>
+		</pre>
 	</section>
 	<section class="slide slide_colorful slide_theme_violet">
 		<h2 class="shout">&mdash;&nbsp;Собирай только нужное!</h2>
@@ -633,48 +714,121 @@
 	<section class="slide slide_colorful slide_theme_raspberry">
 		<h2 class="shout">Итоги</h2>
 	</section>
-	<section class="slide slide_colorful slide_theme_raspberry">
+	<section class="slide">
+		<h2>Виртуальная машина (2 ядра)</h2>
 		<table>
 			<tbody><tr>
-				<th scope="col">Locavore</th>
-				<th>Umami</th>
-				<th>Helvetica</th>
-				<th>Vegan</th>
+				<th scope="col">Сборка</th>
+				<th>Было</th>
+				<th>Стало</th>
+				<th>Профит</th>
 			</tr>
 			<tr>
-				<th scope="row">Fingerstache</th>
-				<td>Kale</td>
-				<td>Chips</td>
-				<td>Keytar</td>
+				<th scope="row">Полная без кэша</th>
+				<td>17,5m</td>
+				<td>12,5m</td>
+				<td>28,5%</td>
 			</tr>
 			<tr>
-				<th scope="row">Sriracha</th>
-				<td>Gluten-free</td>
-				<td>Ennui</td>
-				<td>Keffiyeh</td>
+				<th scope="row">Полная при изменении</th>
+				<td>1m 10s</td>
+				<td>51s</td>
+				<td>27%</td>
 			</tr>
 			<tr>
-				<th scope="row">Thundercats</th>
-				<td>Jean</td>
-				<td>Shorts</td>
-				<td>Biodiesel</td>
+				<th scope="row">Один бандл при изменении</th>
+				<td>24s</td>
+				<td>15s</td>
+				<td>37,5%</td>
 			</tr>
 			<tr>
-				<th scope="row">Terry</th>
-				<td>Richardson</td>
-				<td>Swag</td>
-				<td>Blog</td>
+				<th scope="row">Один большой бандл при изменении</th>
+				<td>40s</td>
+				<td>32s</td>
+				<td>20%</td>
+			</tr>
+			</tbody>
+		</table>
+	</section>
+	<section class="slide">
+		<h2>Локальная физическая машина (4 ядра)</h2>
+		<table>
+			<tbody><tr>
+				<th scope="col">Сборка</th>
+				<th>Было</th>
+				<th>Стало</th>
+				<th>Профит</th>
+			</tr>
+			<tr>
+				<th scope="row">Полная без кэша</th>
+				<td>11,2m</td>
+				<td>4,6m</td>
+				<td>59%</td>
+			</tr>
+			<tr>
+				<th scope="row">Полная при изменении</th>
+				<td>40s</td>
+				<td>21s</td>
+				<td>47,5%</td>
+			</tr>
+			<tr>
+				<th scope="row">Один бандл при изменении</th>
+				<td>15s</td>
+				<td>7s</td>
+				<td>53%</td>
+			</tr>
+			<tr>
+				<th scope="row">Один большой бандл при изменении</th>
+				<td>28s</td>
+				<td>11s</td>
+				<td>60%</td>
+			</tr>
+			</tbody>
+		</table>
+	</section>
+	<section class="slide">
+		<h2>Физическая машинка для сборки (24 ядра)</h2>
+		<table>
+			<tbody><tr>
+				<th scope="col">Сборка</th>
+				<th>Было</th>
+				<th>Стало</th>
+				<th>Профит</th>
+			</tr>
+			<tr>
+				<th scope="row">Полная без кэша</th>
+				<td>3,9m</td>
+				<td>1,8m</td>
+				<td>54%</td>
+			</tr>
+			<tr>
+				<th scope="row">Полная при изменении</th>
+				<td>22s</td>
+				<td>15s</td>
+				<td>32%</td>
+			</tr>
+			<tr>
+				<th scope="row">Один бандл при изменении</th>
+				<td>7,6s</td>
+				<td>6s</td>
+				<td>21%</td>
+			</tr>
+			<tr>
+				<th scope="row">Один большой бандл при изменении</th>
+				<td>11,8s</td>
+				<td>7,7s</td>
+				<td>35%</td>
 			</tr>
 			</tbody>
 		</table>
 	</section>
 	<section class="slide">
 		<ul>
-			<li class="next">Получили профит от железа</li>
-			<li class="next">Получили профит сборки</li>
+			<li class="next">Получили профит от железа (2х)</li>
+			<li class="next">Получили профит от оптимизации кода сборки (30-50%)</li>
+			<li class="next">Получили возможность собирать только нужное для разработки</li>
 			<li class="next">Еще добьем <code>bem-xjst</code> и расширим использование <code>enb-transform-flow</code></li>
-			<li class="next">Разобрались во внутренностях сборки</li>
-			<li class="next">Получили опыт</li>
+			<li class="next">Разобрались во внутренностях сборки, получили опыт</li>
 		</ul>
 	</section>
 	<p class="badge">
