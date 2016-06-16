@@ -630,7 +630,30 @@
 			<span class="transform-line__label">...</span>
 		</div>
 	</section>
-	<section class="slide cover-bg" style="background-image: url(pictures/etf.png)"></section>
+	<section class="slide" style="font-size:20px;">
+		<pre>
+			<code>[ require(<span class="js-string">'enb-transform-flow/techs/tarnsform-flow'</span>), {</code>
+			<code>    sourceSuffixes: [<span class="js-string">'js'</span>],</code>
+			<code>    target: <span class="js-string">'_?.js'</span>,</code>
+			<code>    transformators: [</code>
+			<code>      <span class="js-keyword">function</span> (source) { return require(<span class="js-string">'babel'</span>).transform(source).code; },</code>
+			<code>      <span class="js-keyword">function</span> (source) { return require(<span class="js-string">'uglify-js'</span>).minify(source).code; }</code>
+			<code>    ]</code>
+			<code>} ]</code>
+		</pre>
+	</section>
+	<section class="slide" style="font-size:20px;">
+		<pre>
+			<code>[ require(<span class="js-string">'enb-transform-flow/techs/tarnsform-flow'</span>), {</code>
+			<code>    sourceSuffixes: [<span class="js-string">'js'</span>],</code>
+			<code>    target: <span class="js-string">'_?.js'</span>,</code>
+			<code>    transformators: [</code>
+			<code>      <span class="js-keyword">function</span> (source, <mark>queue</mark>) { <span class="js-comment">...</span> },</code>
+			<code>      <span class="js-keyword">function</span> (source, <mark>queue</mark>)) { <span class="js-comment">...</span> }</code>
+			<code>    ]</code>
+			<code>} ]</code>
+		</pre>
+	</section>
 	<section class="slide slide_colorful slide_theme_turquoise">
 		<h2 class="shout">&mdash;&nbsp;Не требуй лишнего!</h2>
 	</section>
